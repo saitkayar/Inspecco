@@ -1,6 +1,5 @@
 ﻿@using Entities.Concrete
 
-@model Company
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -11,10 +10,21 @@
 </div>
 <ul>
     
-    
-         <li >
-             @Model.CompanyName
+    @foreach (Company item in @ViewBag.company)
+    {
+             <li >
+            @item.Id
     </li>
+    
+             <li >
+            @item.CompanyName
+    </li>
+    
+             <li >
+            @item.CustomerId
+    </li>
+    }
+    
     
    
 </ul>

@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -9,29 +10,21 @@ namespace WebMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICompanyService _companyService;
 
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICompanyService companyService)
         {
             _logger = logger;
+            _companyService = companyService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
+         ViewBag.company= _companyService.GetAll().Data;
+          _logger.LogDebug("ürünler geldi");
 
-            var company = new Company();
-       
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync("https://localhost:7171/api/Company/getall"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                 
-                    company=JsonConvert.DeserializeObject<Company>(apiResponse);
-                }
-            }
-            return View(company);
+            return View();
         }
 
         public IActionResult Privacy()
