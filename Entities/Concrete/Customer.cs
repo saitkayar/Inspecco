@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using System.Collections.Generic;
 
 namespace Entities.Concrete
 {
@@ -7,7 +8,8 @@ namespace Entities.Concrete
 
         public int Id { get; set; }
    
-        public int CustomerName{ get; set; }
+        public string CustomerName{ get; set; }
+        public ICollection<Company> Companies { get; set; }
     }
 
 }

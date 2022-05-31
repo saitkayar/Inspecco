@@ -44,14 +44,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<User>("User not found");
             }
-            if (!HashingHelper.VerifyPasswordHash(
-                userForLoginDto.Password,
-                checkUser.Data.PasswordHash,
-                checkUser.Data.PasswordSalt
-                ))
-            {
-                return new ErrorDataResult<User>("Hatalı şifre girdiniz!");
-            }
+            
             return new SuccessDataResult<User>(checkUser.Data, "Kullacını girişi başarılı.");
         }
         [ExceptionLogAspect(typeof(DatabaseLogger))]
@@ -65,18 +58,10 @@ namespace Business.Concrete
             }
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
-            var user = new User()
-            {
-                FullName = userForRegisterDto.FullName,
-                UserName = userForRegisterDto.UserName,
-                Email= userForRegisterDto.Email,
-                Status = true,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
-            };
-            _userService.Add(user);
+           
+            
 
-            return new SuccessDataResult<User>(user, "Kayıt işlemi başarılı.");
+            return new SuccessDataResult<User>( "Kayıt işlemi başarılı.");
 
         }
         

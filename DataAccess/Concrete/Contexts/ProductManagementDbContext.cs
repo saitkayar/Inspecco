@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Core.Entities.Concrete;
-
+using Entities.Concrete;
 
 namespace DataAccess.Concrete.Contexts
 {
@@ -17,12 +17,14 @@ namespace DataAccess.Concrete.Contexts
        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("");
+            optionsBuilder.UseSqlServer("Server=.;Database=ProductManagementDb;Trusted_Connection=True");
 
         }
         public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
     }
 }

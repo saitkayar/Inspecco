@@ -26,6 +26,11 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CategoryManager>().As<ICategoryService>();
 
             builder.RegisterType<ProductManager>().As<IProductService>();
+
+            builder.RegisterType<CompanyManager>().As<ICompanyService>();
+            builder.RegisterType<CompanyRepository>().As<ICompanyRepository>();
+            builder.RegisterType<CustomerManager>().As<ICustomerService>();
+            builder.RegisterType<CustomerRepository>().As<ICustomerRepository>();
           
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly)
