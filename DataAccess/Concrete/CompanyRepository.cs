@@ -24,7 +24,7 @@ namespace DataAccess.Concrete
                              select new Company
 
                              {CompanyName = c.CompanyName,
-                             Customer=c.Customer,
+                           
                              
                              };
                 return result.ToList();

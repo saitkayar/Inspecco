@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,11 @@ namespace WebAPI.Controllers
         public IActionResult GetByDetail()
         {
             return Ok(_companyService.GetByDetail());
+        }
+        [HttpPost]
+        public IActionResult Add(Company company)
+        {
+            return Ok(_companyService.Add(company));
         }
     }
 }

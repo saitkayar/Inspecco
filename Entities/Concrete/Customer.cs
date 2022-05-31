@@ -9,7 +9,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
    
         public string CustomerName{ get; set; }
-        public ICollection<Company> Companies { get; set; }
+       
     }
 
 }
