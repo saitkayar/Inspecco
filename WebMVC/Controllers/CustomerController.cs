@@ -17,7 +17,7 @@ namespace WebMVC.Controllers
 
         public IActionResult Index()
         {
-           ViewBag.customers= _customerService.GetAll();
+           ViewBag.customers= _customerService.GetAll().Data;
             return View();
         }
         public IActionResult Invited()

@@ -38,27 +38,28 @@ namespace WebMVC.Controllers
      
         public IActionResult Invite()
         {
+            ViewBag.customer = _customerService.GetAll().Data.Where(a=>a.IsInvited==false);
             return View();
 
         }
 
         [HttpPost("ınviteCustomer")]
-        public IActionResult Invite(string customerName)
+        public IActionResult Invite(Customer customer)
         {
-            var result = _companyService.GetByDetail(x => x.CustomerName == customerName);
+            //var result = _companyService.GetByDetail(x => x.CustomerName == customer.CustomerName);
 
-            if (result.Success)
-            {
-                _customerService.Get(c => c.CustomerName == customerName).Data.IsInvited = true;
+            
+           
+                _customerService.Get(c => c.CustomerName == customer.CustomerName).Data.IsInvited = true;
 
 
 
                
 
 
-            }
+            
 
-            return View("davet gönderilemedi");
+            return RedirectToAction("Invited","Customer");
 
         }
     }
