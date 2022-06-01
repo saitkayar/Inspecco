@@ -1,5 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<div class="account-content">
+                                <form method="post" asp-controller="Auth" asp-action="Register" class="form-horizontal">
+                                  
+
+                                    <div class="form-group m-b-20">
+                                        <div class="col-12">
+                                            <label for="FullName">Kullanıcı İsmi</label>
+                                            <input class="form-control" type="text" id="FullName" name="UserName" required="" placeholder="Ali" >
+                                        
+                                        </div>
+                                    </div>
+                                    
+                                   
+
+                                    <div class="form-group m-b-20">
+                                        <div class="col-12">
+                                            <label for="Emaill">E-posta Adresi</label>
+                                            <input class="form-control" type="email" name="Email" id="Emaill" required="" placeholder="ali@hotmail.com" >
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group m-b-20">
+                                        <div class="col-12">
+                                            <label for="Passwordd">Şifre</label>
+                                            <input class="form-control" name="Password" type="password" required="" id="Passwordd" placeholder="Şifre">
+                                          
+                                        </div>
+                                    </div>
+                                   
+
+
+
+                                    <div class="form-group account-btn text-center m-t-10">
+                                        <div class="col-12">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit">Kaydol</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                       
+                        <!-- end card-box-->
+
+
+                        <div class="row m-t-50">
+                            <div class="col-sm-12 text-center">
+                                <p class="text-muted">Zaten bir hesabın var mı?  <a asp-controller="Auth" asp-action="Login" class="text-dark m-l-5">Giriş</a></p>
+                            </div>
+                        </div>

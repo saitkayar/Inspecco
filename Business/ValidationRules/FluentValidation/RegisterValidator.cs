@@ -14,7 +14,7 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(e => e.UserName).NotEmpty().NotNull().NotEqual("string");
             RuleFor(e => e.Email).EmailAddress().WithMessage("Email adresinizi kontrol ediniz.");
-            RuleFor(e => e.FullName).NotEmpty().NotNull();
+            
             RuleFor(e => e.Password).NotEmpty().MaximumLength(2);
         }
     }

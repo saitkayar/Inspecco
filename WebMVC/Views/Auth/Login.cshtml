@@ -1,5 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿ <div class="account-content">
+                                <form class="form-horizontal" method="post" asp-controller="Auth" asp-action="Login">
+
+                                    <div class="form-group m-b-20">
+                                        <div class="col-12">
+                                            <label for="emailaddress">E-posta Adresi</label>
+                                            <input class="form-control" type="email" id="emailaddress" name="Email" required="" placeholder="ali@hotmail.com" >
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group m-b-20">
+                                        <div class="col-12">
+                                          
+                                            <label for="password">Şifre</label>
+                                            <input class="form-control" type="password" required="" name="Password" id="password" placeholder="Şifre giriniz">
+                                                         
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="form-group account-btn text-center m-t-10">
+                                        <div class="col-12">
+                                            <button class="btn btn-lg btn-primary btn-block bg-success" type="submit">Giriş</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                <div class="row m-t-50">
+                            <div class="col-sm-12 text-center">
+                                <p class="text-muted">Hesabınız yok mu? <a asp-controller="Auth" asp-action="Register" class="text-dark m-l-5">Kaydol</a></p>
+                            </div>
+                        </div>
+                                </div>
