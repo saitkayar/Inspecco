@@ -26,5 +26,15 @@ namespace DataAccess.Concrete.Contexts
         public DbSet<Company> Companies { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().HasData(new Customer { Id = 1, CustomerName = "sait" },
+            new Customer { Id = 2, CustomerName = "kayar" }, new Customer { Id = 3, CustomerName = "fena" }
+            );
+            modelBuilder.Entity<Company>().HasData(new Company { Id = 1, CompanyName = "kayarlar", CustomerId = 1 },
+                new Company { Id = 2, CompanyName = "fenalar", CustomerId = 2 },
+                new Company { Id = 3, CompanyName = "bakmazlar", CustomerId = 3 });
+        }
+
     }
 }

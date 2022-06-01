@@ -39,6 +39,7 @@ namespace WebAPI.Controllers
         [HttpDelete("delete")]
         public IActionResult Delete(Product product)
         {
+            
             return Ok(this._productService.Delete(product));
         }
     }

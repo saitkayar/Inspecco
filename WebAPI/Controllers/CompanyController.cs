@@ -31,9 +31,29 @@ namespace WebAPI.Controllers
             return Ok(_companyService.GetByDetail());
         }
         [HttpPost]
-        public IActionResult Add(Company company)
+        public IActionResult Add(string company)
         {
-            return Ok(_companyService.Add(company));
+            var result = new Company()
+            {
+                CompanyName = company,
+
+            };
+            return Ok(_companyService.Add(result));
+        }
+        [HttpPut]
+        public IActionResult Update(Company company)
+        {
+            return Ok(_companyService.Update(company));
+        }
+        [HttpDelete]
+        public IActionResult Delete(Company company)
+        {
+            return Ok(_companyService.Delete(company));
+        }
+        [HttpPost("ınviteCustomer")]
+        public IActionResult Invite(Company company)
+        {
+            return Ok(_companyService.Delete(company));
         }
     }
 }

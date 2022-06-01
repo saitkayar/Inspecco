@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +45,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Company>>(_companyRepository.GetAll(filter),"firmalar getirildi");
         }
 
-        public IDataResult<List<Company>> GetByDetail(Expression<Func<Company, bool>> filter = null)
+        public IDataResult<List<CompanyDto>> GetByDetail(Expression<Func<CompanyDto, bool>> filter = null)
         {
-            return new SuccessDataResult<List<Company>>(_companyRepository.GetCompanyDetail(filter), "firmalar getirildi");
+            return new SuccessDataResult<List<CompanyDto>>(_companyRepository.GetCompanyDetail(filter), "firmalar getirildi");
         }
 
         public IResult Update(Company company)

@@ -14,21 +14,25 @@ namespace DataAccess.Concrete
 {
     public class CompanyRepository : EfBaseRepository<Company, ProductManagementDbContext>, ICompanyRepository
     {
-        public List<Company> GetCompanyDetail(Expression<Func<Company, bool>> filter = null)
+        public List<CompanyDto> GetCompanyDetail(Expression<Func<CompanyDto, bool>> filter = null)
         {
             using (var context=new ProductManagementDbContext())
             {
                 var result = from c in context.Companies
                              join
  m in context.Customers on c.CustomerId equals m.Id
-                             select new Company
+                             select new CompanyDto
 
-                             {CompanyName = c.CompanyName,
+                             {
+                                 CompanyName = c.CompanyName,
+                                 CustomerName=m.CustomerName,
+                                 
                            
                              
                              };
                 return result.ToList();
             }
         }
+
     }
 }

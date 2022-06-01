@@ -12,6 +12,7 @@ namespace DataAccess.Abstract
 {
     public interface ICompanyRepository : IBaseRepository<Company>
     {
-        List<Company> GetCompanyDetail(Expression<Func<Company, bool>> filter=null);
+        List<CompanyDto> GetCompanyDetail(Expression<Func<CompanyDto, bool>> filter=null);
+     
     }
 }

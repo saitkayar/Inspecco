@@ -4,10 +4,24 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class first : Migration
+    public partial class ddd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
@@ -62,36 +76,34 @@ namespace DataAccess.Migrations
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Companies",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "Companies",
+                columns: new[] { "Id", "CompanyName", "CustomerId" },
+                values: new object[,]
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Companies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Companies_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    { 1, "kayarlar", 1 },
+                    { 2, "fenalar", 2 },
+                    { 3, "bakmazlar", 3 }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Companies_CustomerId",
-                table: "Companies",
-                column: "CustomerId");
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "CustomerName" },
+                values: new object[,]
+                {
+                    { 1, "sait" },
+                    { 2, "kayar" },
+                    { 3, "fena" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Companies");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "OperationClaims");
@@ -101,9 +113,6 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
         }
     }
 }
