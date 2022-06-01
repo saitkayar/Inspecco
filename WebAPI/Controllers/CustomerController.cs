@@ -9,14 +9,14 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly IInvitationService _customerService;
+        private readonly ICustomerService _customerService;
 
-        public CustomerController(IInvitationService customerService)
+        public CustomerController(ICustomerService customerService)
         {
             _customerService = customerService;
         }
 
-        [HttpGet]
+        [HttpGet("getall")]
         public IActionResult GetAll()
         {
 
@@ -29,18 +29,18 @@ namespace WebAPI.Controllers
 
             return Ok(_customerService.Get(x=>x.Id==id));
         }
-        [HttpPost]
+        [HttpPost("ekle")]
         public IActionResult Add(Customer customer  )
         {
             return Ok(_customerService.Add(customer));
         }
 
-        [HttpPut]
+        [HttpPut("güncelle")]
         public IActionResult Update(Customer customer)
         {
             return Ok(_customerService.Update(customer));
         }
-        [HttpDelete]
+        [HttpDelete("sil")]
         public IActionResult Delete(Customer customer)
         {
             return Ok(_customerService.Delete(customer));

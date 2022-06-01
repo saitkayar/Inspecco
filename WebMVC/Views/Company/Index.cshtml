@@ -1,0 +1,40 @@
+﻿
+@*<ul>
+    
+    @foreach (var item in @ViewBag.company)
+    {
+        
+    
+             <li >
+            @item.CompanyName
+    </li>
+    
+             <li >
+            @item.CustomerName
+    </li>
+    }
+    
+    
+   
+</ul>*@
+
+<table class="table table-dark table-hover">
+ <tr>  
+ <th>Firma ismi</th>    
+ 
+
+ </tr>
+ @foreach (var item in @ViewBag.company)
+ {
+     <tr>
+         <td>@item.CompanyName</td>
+
+      
+     </tr>
+ }
+</table>
+
+   <a class="btn btn-success mt-5" asp-controller="Company" asp-action="Add">Yeni Firma Ekle</a>
+   
+   <a class="btn btn-success mt-5" asp-controller="Company" asp-action="Invite">Yeni Kişi Davet Et</a>
+   <a class="btn btn-success mt-5" asp-controller="Customer" asp-action="Invited">Önceden Davet edilenler</a>

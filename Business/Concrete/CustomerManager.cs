@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class CustomerManager : IInvitationService
+    public class CustomerManager : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -22,27 +22,35 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
-            throw new NotImplementedException();
+
+            _customerRepository.Add(customer);
+            return new SuccessResult("yeni kişi eklendi");
+           
+          
         }
 
         public IResult Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerRepository.Delete(customer);
+            return new SuccessResult(" kişi silindi");
         }
 
         public IDataResult<Customer> Get(Expression<Func<Customer, bool>> filter)
         {
-            throw new NotImplementedException();
+          
+            return new SuccessDataResult<Customer>(_customerRepository.Get(filter), "kişi getirildi");
         }
 
         public IDataResult<List<Customer>> GetAll(Expression<Func<Customer, bool>> filter = null)
         {
-            throw new NotImplementedException();
+
+            return new SuccessDataResult<List<Customer>>(_customerRepository.GetAll(filter), "kişiler getirildi");
         }
 
         public IResult Update(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerRepository.Update(customer);
+            return new SuccessResult(" kişi güncellendi");
         }
     }
 }

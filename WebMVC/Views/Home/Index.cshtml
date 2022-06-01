@@ -1,4 +1,4 @@
-﻿@using Entities.Concrete
+﻿
 
 @{
     ViewData["Title"] = "Home Page";
@@ -8,23 +8,3 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-<ul>
-    
-    @foreach (Company item in @ViewBag.company)
-    {
-             <li >
-            @item.Id
-    </li>
-    
-             <li >
-            @item.CompanyName
-    </li>
-    
-             <li >
-            @item.CustomerId
-    </li>
-    }
-    
-    
-   
-</ul>

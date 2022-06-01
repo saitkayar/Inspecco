@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
+
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -30,7 +30,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(this._userRepository.Get(filter), "Kullanıcı getirildi");
         }
-        [ValidationAspect(typeof(UserValidator), Priority = 1)]
+       
         public IResult Add(User user)
         {
             this._userRepository.Add(user);

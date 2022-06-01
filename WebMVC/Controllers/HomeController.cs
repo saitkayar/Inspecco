@@ -10,19 +10,18 @@ namespace WebMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICompanyService _companyService;
+       
 
-        public HomeController(ILogger<HomeController> logger, ICompanyService companyService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _companyService = companyService;
+         
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-         ViewBag.company= _companyService.GetAll().Data;
-          _logger.LogDebug("ürünler geldi");
+    
 
             return View();
         }

@@ -12,13 +12,13 @@ namespace WebAPI.Controllers
     {
         private readonly ICompanyService _companyService;
         private readonly ICustomerService _customerService;
-        private readonly IInvitationService _ınvitationService;
+      
 
-        public CompanyController(ICompanyService companyService, ICustomerService customerService, IInvitationService ınvitationService)
+        public CompanyController(ICompanyService companyService, ICustomerService customerService)
         {
             _companyService = companyService;
             _customerService = customerService;
-            _ınvitationService = ınvitationService;
+         
 
         }
         [HttpGet("getall")]
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         {
             return Ok(_companyService.GetAll());
         }
-        [HttpGet("get")]
+        [HttpGet("getonlyone")]
         public IActionResult Get(int id)
         {
             return Ok(_companyService.Get(x=>x.Id==id));
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
         {
             return Ok(_companyService.GetByDetail());
         }
-        [HttpPost]
+        [HttpPost("firma ekle")]
         public IActionResult Add(string company)
         {
             var result = new Company()
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             };
             return Ok(_companyService.Add(result));
         }
-        [HttpPut]
+        [HttpPut("firma güncelle")]
         public IActionResult Update(Company company)
         {
             return Ok(_companyService.Update(company));

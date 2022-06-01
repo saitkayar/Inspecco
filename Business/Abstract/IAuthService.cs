@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using Core.Utilities.Security.JWT;
+
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,6 @@ namespace Business.Abstract
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto);
         public IResult UserExists(string userName);
      
-        public IDataResult<AccessToken> CreateAccessToken(User user);
+       
     }
 }

@@ -1,0 +1,35 @@
+﻿@*<ul>
+    
+    @foreach (var item in @ViewBag.customers)
+    {
+             <li >
+            @item.Id
+    </li>
+    
+             <li >
+            @item.CustomerName
+    </li>
+    
+             <li >
+            @item.IsInvited
+    </li>
+    }*@
+    
+    
+   
+@*</ul>*@
+<table class="table table-dark table-hover">
+ <tr>  
+ <th>Müşteri ismi</th>    
+ <th>Davet Edilme durumu</th>    
+ <th>eylemler</th>    
+ </tr>
+ @foreach (var item in @ViewBag.customers)
+ {
+     <tr>
+         <td>@item.Id</td>
+         <td>  @item.CustomerName</td>
+         <td>   @item.IsInvited</td>
+     </tr>
+ }
+</table>

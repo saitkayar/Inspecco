@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -15,21 +16,21 @@ namespace Business.Concrete
     public class CompanyManager : ICompanyService
     {
         private readonly ICompanyRepository _companyRepository;
-        private IInvitationService _invitationService;
+  
 
-        public CompanyManager(ICompanyRepository companyRepository, IInvitationService invitationService)
+        public CompanyManager(ICompanyRepository companyRepository)
         {
             _companyRepository = companyRepository;
-            _invitationService = invitationService;
+          
         }
 
         public IResult Add(Company company)
         {
-        var result=  _companyRepository.Add(company);
-            if (result)
-            {
-               
-            }
+            var validator = new CompanyValidator();
+          validator.Validate(company);
+           
+        _companyRepository.Add(company);
+         
             return new SuccessResult("yeni firma eklendi");
         }
 
@@ -41,7 +42,7 @@ namespace Business.Concrete
 
         public IDataResult<Company> Get(Expression<Func<Company, bool>> filter)
         {
-            
+           
             return new SuccessDataResult<Company>(_companyRepository.Get(filter),"firma getirildi");
         }
 
