@@ -12,15 +12,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete
 {
-    public class CompanyRepository : EfBaseRepository<Company, ProductManagementDbContext>, ICompanyRepository
+    public class CompanyRepository : EfBaseRepository<Company, InspeccoDbContext>, ICompanyRepository
     {
         public List<CompanyDto> GetCompanyDetail(Expression<Func<CompanyDto, bool>> filter = null)
         {
-            using (var context=new ProductManagementDbContext())
+            using (var context=new InspeccoDbContext())
             {
                 var result = from c in context.Companies
                              join
  m in context.Customers on c.CustomerId equals m.Id
+ 
                              select new CompanyDto
 
                              {

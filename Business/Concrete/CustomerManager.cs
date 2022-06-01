@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class CustomerManager : ICustomerService
+    public class CustomerManager : IInvitationService
     {
         private readonly ICustomerRepository _customerRepository;
 

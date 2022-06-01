@@ -5,7 +5,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete
 {
-    public class CustomerRepository : EfBaseRepository<Customer, ProductManagementDbContext>, ICustomerRepository
+    public class CustomerRepository : EfBaseRepository<Customer, InspeccoDbContext>, ICustomerRepository
     {
     }
 }

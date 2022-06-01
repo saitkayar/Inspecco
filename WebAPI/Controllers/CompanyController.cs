@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,15 @@ namespace WebAPI.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
+        private readonly ICustomerService _customerService;
+        private readonly IInvitationService _ınvitationService;
 
-        public CompanyController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService, ICustomerService customerService, IInvitationService ınvitationService)
         {
             _companyService = companyService;
+            _customerService = customerService;
+            _ınvitationService = ınvitationService;
+
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
@@ -51,9 +57,23 @@ namespace WebAPI.Controllers
             return Ok(_companyService.Delete(company));
         }
         [HttpPost("ınviteCustomer")]
-        public IActionResult Invite(Company company)
+        public IActionResult Invite( string customerName)
         {
-            return Ok(_companyService.Delete(company));
+            var result = _companyService.GetByDetail(x => x.CustomerName == customerName);
+            
+            if (result.Success)
+            {
+                _customerService.Get(c => c.CustomerName == customerName).Data.IsInvited=true;
+            
+
+             
+                return Ok($"{customerName}'e davetiye gönderildi");
+
+
+            }
+
+            return BadRequest("davet gönderilemedi");
+            
         }
     }
 }

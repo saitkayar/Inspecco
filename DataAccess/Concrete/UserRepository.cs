@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete
 {
-    public class UserRepository : EfBaseRepository<User, ProductManagementDbContext>, IUserRepository
+    public class UserRepository : EfBaseRepository<User, InspeccoDbContext>, IUserRepository
     {
      
         public List<OperationClaim> GetClaims(User user)
         {
-            using(var context= new ProductManagementDbContext())
+            using(var context= new InspeccoDbContext())
             {
                 var result = from operationClaims in context.OperationClaims
                              join userOperationClaims in context.UserOperationClaims

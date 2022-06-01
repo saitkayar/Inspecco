@@ -15,15 +15,21 @@ namespace Business.Concrete
     public class CompanyManager : ICompanyService
     {
         private readonly ICompanyRepository _companyRepository;
+        private IInvitationService _invitationService;
 
-        public CompanyManager(ICompanyRepository companyRepository)
+        public CompanyManager(ICompanyRepository companyRepository, IInvitationService invitationService)
         {
             _companyRepository = companyRepository;
+            _invitationService = invitationService;
         }
 
         public IResult Add(Company company)
         {
-           _companyRepository.Add(company);
+        var result=  _companyRepository.Add(company);
+            if (result)
+            {
+               
+            }
             return new SuccessResult("yeni firma eklendi");
         }
 
@@ -35,8 +41,8 @@ namespace Business.Concrete
 
         public IDataResult<Company> Get(Expression<Func<Company, bool>> filter)
         {
-            _companyRepository.Get(filter);
-            return new SuccessDataResult<Company>("firma getirildi");
+            
+            return new SuccessDataResult<Company>(_companyRepository.Get(filter),"firma getirildi");
         }
 
         public IDataResult<List<Company>> GetAll(Expression<Func<Company, bool>> filter = null)

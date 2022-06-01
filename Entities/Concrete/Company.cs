@@ -13,7 +13,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public string CompanyName { get; set; }
         public int? CustomerId { get; set; }
-   
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 
 }

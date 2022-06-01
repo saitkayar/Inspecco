@@ -4,16 +4,18 @@ using DataAccess.Concrete.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(ProductManagementDbContext))]
-    partial class ProductManagementDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(InspeccoDbContext))]
+    [Migration("20220601143335_ddd")]
+    partial class ddd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,10 +125,18 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsInvited")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Customers");
 
@@ -134,18 +144,97 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CustomerName = "sait"
+                            CustomerName = "sait",
+                            IsInvited = true
                         },
                         new
                         {
                             Id = 2,
-                            CustomerName = "kayar"
+                            CustomerName = "kayar",
+                            IsInvited = true
                         },
                         new
                         {
                             Id = 3,
-                            CustomerName = "fena"
+                            CustomerName = "fena",
+                            IsInvited = true
                         });
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Invitation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Invitations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CompanyId = 1,
+                            CustomerId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CompanyId = 2,
+                            CustomerId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CompanyId = 2,
+                            CustomerId = 2
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Customer", b =>
+                {
+                    b.HasOne("Entities.Concrete.Company", "Company")
+                        .WithMany("Customers")
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Invitation", b =>
+                {
+                    b.HasOne("Entities.Concrete.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Company", b =>
+                {
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

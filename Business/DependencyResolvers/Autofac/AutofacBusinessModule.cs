@@ -22,14 +22,14 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<InvitationManager>().As<IInvitationService>();
+            builder.RegisterType<IInvitationRepository>().As<InvitationRepository>();
          
-            builder.RegisterType<CategoryManager>().As<ICategoryService>();
-
-            builder.RegisterType<ProductManager>().As<IProductService>();
+           
 
             builder.RegisterType<CompanyManager>().As<ICompanyService>();
             builder.RegisterType<CompanyRepository>().As<ICompanyRepository>();
-            builder.RegisterType<CustomerManager>().As<ICustomerService>();
+            builder.RegisterType<CustomerManager>().As<IInvitationService>();
             builder.RegisterType<CustomerRepository>().As<ICustomerRepository>();
           
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

@@ -9,7 +9,13 @@ namespace Entities.Concrete
         public int Id { get; set; }
    
         public string CustomerName{ get; set; }
-       
+
+        public bool IsInvited { get; set; } = false;
+      
+
+
+   
+
     }
 
 }
