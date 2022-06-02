@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,13 @@ namespace WebMVC.Controllers
 {
     public class AuthController : Controller
     {
+        private IAuthService _authService;
+
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -13,12 +21,19 @@ namespace WebMVC.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+          
             return View();
         }
         [HttpPost]
         public IActionResult Login(UserForLoginDto user)
         {
-            return View();
+            var loginResult = _authService.Login(user);
+            if (!loginResult.Success)
+            {
+                return BadRequest(loginResult.Message);
+            }
+            var token = _authService.CreateAccessToken(loginResult.Data);
+            return View(token);
         }
         [HttpGet]
         public IActionResult Register()
@@ -28,7 +43,13 @@ namespace WebMVC.Controllers
         [HttpPost]
         public IActionResult Register(UserForRegisterDto user)
         {
-            return View();
+
+            var result = _authService.Register(user);
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+            return View(result);
         }
     }
 }

@@ -8,6 +8,7 @@
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>

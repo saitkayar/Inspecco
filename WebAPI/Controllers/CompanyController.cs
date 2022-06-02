@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +37,9 @@ namespace WebAPI.Controllers
         {
             return Ok(_companyService.GetByDetail());
         }
+        [Authorize(Roles = "admin")]
         [HttpPost("firma ekle")]
+      
         public IActionResult Add(string company)
         {
             var result = new Company()
@@ -46,11 +49,13 @@ namespace WebAPI.Controllers
             };
             return Ok(_companyService.Add(result));
         }
+        [Authorize(Roles = "admin")]
         [HttpPut("firma güncelle")]
         public IActionResult Update(Company company)
         {
             return Ok(_companyService.Update(company));
         }
+        [Authorize(Roles = "admin")]
         [HttpDelete]
         public IActionResult Delete(Company company)
         {

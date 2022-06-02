@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Business.Concrete
             _companyRepository = companyRepository;
           
         }
-
+        [Authorize(Roles ="admin")]
         public IResult Add(Company company)
         {
             var validator = new CompanyValidator();
@@ -33,25 +34,25 @@ namespace Business.Concrete
          
             return new SuccessResult("yeni firma eklendi");
         }
-
+        [Authorize]
         public IResult Delete(Company company)
         {
             _companyRepository.Delete(company);
             return new SuccessResult("firma silindi");
         }
-
+        [Authorize]
         public IDataResult<Company> Get(Expression<Func<Company, bool>> filter)
         {
            
             return new SuccessDataResult<Company>(_companyRepository.Get(filter),"firma getirildi");
         }
-
+        [AllowAnonymous]
         public IDataResult<List<Company>> GetAll(Expression<Func<Company, bool>> filter = null)
         {
            
             return new SuccessDataResult<List<Company>>(_companyRepository.GetAll(filter),"firmalar getirildi");
         }
-
+        [AllowAnonymous]
         public IDataResult<List<CompanyDto>> GetByDetail(Expression<Func<CompanyDto, bool>> filter = null)
         {
             return new SuccessDataResult<List<CompanyDto>>(_companyRepository.GetCompanyDetail(filter), "firmalar getirildi");

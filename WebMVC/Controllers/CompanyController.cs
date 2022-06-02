@@ -34,8 +34,7 @@ namespace WebMVC.Controllers
             return RedirectToAction("Index","Company");
 
         }
-        [HttpGet]
-     
+        [HttpGet]    
         public IActionResult Invite()
         {
             ViewBag.customer = _customerService.GetAll().Data.Where(a=>a.IsInvited==false);

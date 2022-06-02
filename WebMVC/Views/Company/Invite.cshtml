@@ -13,8 +13,8 @@
     <label for="exampleInputPassword1" class="form-label">Davet Gönderme</label>
   
     
-          <select name="Id" class="form-control" >
-                 <option value="" disabled selected>İlçe Seçiniz</option>
+          <select  class="form-control" >
+                 <option value="" disabled selected>Musteriler</option>
             @foreach (Customer customer in @ViewBag.customer)
             {  
                 <option value="@customer.Id">@customer.CustomerName</option>
